@@ -8,34 +8,40 @@ estruturas condicionais
 # dependencies = [
 #     "numpy",
 #     "matplotlib",
+#     "requests",
 # ]
 # ///
 
-
+import requests
 import numpy as np 
+import pandas as pd
 import matplotlib.pyplot as pyplot
 
+URL = "https://servicodados.ibge.gov.br/api/v3/agregados/8171/periodos/2019/variaveis?localidades=N1"
+
+resposta = requests.get(URL)
+dados = resposta.json()
+
+print(pd.json_normalize(dados))
 
 pyplot.figure(figsize=(10,6))
 pyplot.title("Gráfico de Dispersão - IMC")
 pyplot.xlabel("Altura")
 pyplot.ylabel("Peso")
 
-#eixo x
 alturas = np.linspace(0.60, 2.72, 100)
 
-#eixo y
 baixo_peso  = 18.5 * (alturas ** 2)
 peso_normal = 25 * (alturas ** 2)
 sobrepeso   = 30 * (alturas ** 2)
 obesidade_1 = 35 * (alturas ** 2)
 obesidade_2 = 40 * (alturas ** 2)
 
-pyplot.fill_betweenx(alturas, 0, baixo_peso, color="lightblue", alpha=0.3, label="Abaixo do Peso")
-pyplot.fill_betweenx(alturas, baixo_peso, peso_normal, color="green", alpha=0.4, label="Peso Normal")
-pyplot.fill_betweenx(alturas, peso_normal, sobrepeso, color="yellow", alpha=0.5, label="Sobrepeso")
-pyplot.fill_betweenx(alturas, sobrepeso, obesidade_1, color="orange", alpha=0.6, label="Obesidade Grau I")
-pyplot.fill_betweenx(alturas, obesidade_1, obesidade_2, color="red", alpha=0.7, label="Obesidade Grau II")
+pyplot.fill_betweenx(alturas, 0, baixo_peso, color="lightblue", alpha=0.3, label="Abaixo do Peso", linestyle="--")
+pyplot.fill_betweenx(alturas, baixo_peso, peso_normal, color="green", alpha=0.4, label="Peso Normal",  linestyle="--")
+pyplot.fill_betweenx(alturas, peso_normal, sobrepeso, color="yellow", alpha=0.5, label="Sobrepeso",  linestyle="--")
+pyplot.fill_betweenx(alturas, sobrepeso, obesidade_1, color="orange", alpha=0.6, label="Obesidade Grau I",  linestyle="--")
+pyplot.fill_betweenx(alturas, obesidade_1, obesidade_2, color="red", alpha=0.7, label="Obesidade Grau II", linestyle="--")
 
 
 peso = input("Informe seu Peso (kg): ") 
@@ -44,7 +50,7 @@ altura = input("Informe sua Altura em (Ex: 1.70): ")
 peso = float(peso)
 altura = float(altura)
 
-pyplot.scatter(peso, altura, color="red", marker="o", s=100, zorder=5, label="Vc esta aqui")
+pyplot.scatter(peso, altura, color="black", marker="o", s=100, zorder=5, label="Vc esta aqui")
 
 pyplot.ylim(min(alturas), max(alturas))
 pyplot.xlim(min(baixo_peso), max(obesidade_2))
