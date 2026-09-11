@@ -12,33 +12,19 @@ estruturas condicionais
 # ]
 # ///
 
-import requests
 import numpy as np 
 import pandas as pd
 import matplotlib.pyplot as pyplot
-
-
-
-
 import kagglehub
 from kagglehub import KaggleDatasetAdapter
 
-# Set the path to the file you'd like to load
-file_path = ""
-
-# Load the latest version
 df = kagglehub.load_dataset(
   KaggleDatasetAdapter.PANDAS,
   "mustafaali96/weight-height",
-  file_path,
-  # Provide any additional arguments like 
-  # sql_query or pandas_kwargs. See the 
-  # documenation for more information:
-  # https://github.com/Kaggle/kagglehub/blob/main/README.md#kaggledatasetadapterpandas
+  "weight-height.csv",
 )
 
-print("First 5 records:", df.head())
-
+print("First 5 records:", df.describe)
 
 pyplot.figure(figsize=(10,6))
 pyplot.title("Gráfico de Dispersão - IMC")
