@@ -3,28 +3,8 @@ Algoritmo simples em Python para classificação de IMC e associação com poten
 riscos à saúde. Desenvolvido para aplicar conceitos de lógica de programação e 
 estruturas condicionais 
 """
-
-# /// script
-# dependencies = [
-#     "numpy",
-#     "matplotlib",
-#     "requests",
-# ]
-# ///
-
 import numpy as np 
-import pandas as pd
 import matplotlib.pyplot as pyplot
-import kagglehub
-from kagglehub import KaggleDatasetAdapter
-
-df = kagglehub.load_dataset(
-  KaggleDatasetAdapter.PANDAS,
-  "mustafaali96/weight-height",
-  "weight-height.csv",
-)
-
-print("First 5 records:", df.describe)
 
 pyplot.figure(figsize=(10,6))
 pyplot.title("Gráfico de Dispersão - IMC")
@@ -45,47 +25,9 @@ pyplot.fill_betweenx(alturas, peso_normal, sobrepeso, color="yellow", alpha=0.5,
 pyplot.fill_betweenx(alturas, sobrepeso, obesidade_1, color="orange", alpha=0.6, label="Obesidade Grau I",  linestyle="--")
 pyplot.fill_betweenx(alturas, obesidade_1, obesidade_2, color="red", alpha=0.7, label="Obesidade Grau II", linestyle="--")
 
-
-peso = input("Informe seu Peso (kg): ") 
-altura = input("Informe sua Altura em (Ex: 1.70): ")
-
-peso = float(peso)
-altura = float(altura)
-
 pyplot.scatter(peso, altura, color="black", marker="o", s=100, zorder=5, label="Vc esta aqui")
 
 pyplot.ylim(min(alturas), max(alturas))
 pyplot.xlim(min(baixo_peso), max(obesidade_2))
 
 pyplot.show()
-
-print("Índice de Massa Corporal (IMC)\n")
-
-
-imc = peso / (altura ** 2)
-
-print("\nSeu IMC é:", int(imc))
-
-if imc < 18.5:
-    print("|Baixo peso| Fadiga, estresse, perda de cabelo")
-elif 18.5 <= imc < 25: 
-    print("|Peso normal| Menor risco de doenças")
-elif 25 <= imc < 30: 
-    print("|Sobrepeso| Fadiga, má circulação, varizes")
-elif 30 <= imc < 35: 
-    print("|Obesidade Grau I| Diabetes, infarto, angina")
-elif 35 <= imc < 40: 
-    print("|Obesidade Grau II| Apneia do sono, falta de ar")
-else:
-    print("|Obesidade Grau III| Refluxo, infarto, AVC, dificuldades de locomoção")
-
-
-
-
-
-
-
-
-
-
-
