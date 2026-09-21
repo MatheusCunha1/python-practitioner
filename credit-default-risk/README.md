@@ -1,3 +1,3 @@
-# CDR — Credit Default Risk
+# Credit Scoring - Home Credit Default Risk
 
-Prever se um cliente vai pagar ou não um empréstimo, com base no histórico de crédito dele em outras instituições
+Previsão de inadimplência de crédito com base no histórico do cliente, usando o dataset [Home Credit Default Risk](https://www.kaggle.com/c/home-credit-default-risk/data) (Kaggle).
