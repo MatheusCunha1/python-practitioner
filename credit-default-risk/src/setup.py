@@ -8,7 +8,7 @@ print("Path to competition files:", path)
 
 diretorio = Path.home() / ".cache" / "kagglehub" / "competitions" / "home-credit-default-risk"
 
-destino = Path("../data")
+destino = Path("../data/bronze")
 
 destino.mkdir(parents=True)
 
