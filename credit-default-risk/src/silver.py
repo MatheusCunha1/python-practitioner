@@ -11,12 +11,14 @@ for arquivo in arquivos:
     if not parquet.exists(): 
         df = pd.read_csv(arquivo, encoding="latin1") 
         df.to_parquet(parquet)
+  
 
     else: 
         with zipfile.ZipFile(r"../data/bronze/" + arquivo.stem + ".zip",  mode="w") as arquivo_zip:
             arquivo_zip.write(arquivo)
         
             arquivo.unlink()
+
 
 
 
