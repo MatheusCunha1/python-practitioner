@@ -1,13 +1,12 @@
 import duckdb 
 from pathlib import Path
 
-conect = duckdb.connect()
+def create_view(con, pasta = Path(r"../data/silver")): 
 
-silver = Path(r"../data/silver").iterdir()
+    pasta = pasta.iterdir()
 
-def create_view(conect, silver): 
-    for arquivo in silver: 
-        conect.sql(f""" 
+    for arquivo in pasta: 
+        con.sql(f""" 
             CREATE OR REPLACE VIEW VW_{arquivo.stem} AS 
-                SELECT * FROM {str(arquivo)} 
+                SELECT * FROM '{str(arquivo)}' 
         """)
